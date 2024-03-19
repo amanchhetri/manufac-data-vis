@@ -1,3 +1,39 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 .App {
   text-align: center;
+}
+
+.chart-wrapper {
+  display: flex;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.chart {
+  flex: 1; /* Each chart takes equal width */
+  height: 70vh !important; /* Set the height of the chart container */
+}
+
+/* Media query for phones and IPad Pro */
+@media screen and (max-width: 1024px) {
+  .chart-wrapper {
+    margin-top: 0;
+  }
+  .chart {
+    flex: 100%; /* Each chart takes full width on phones/ipad */
+    height: 40vh !important;
+  }
 }

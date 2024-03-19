@@ -1,13 +1,16 @@
-import React from 'react';
-import './App.css';
-import Chart from './components/Chart';
-import BarChart from './components/BarChart';
+import React from "react";
+import "./App.css";
+import LineChart from "./components/LineChart";
+import BarChart from "./components/BarChart";
 
 function App() {
   return (
     <div className="App">
-      <Chart />
-      <BarChart />
+      <h1>Data Visualization</h1>
+      <div className="chart-wrapper">
+        <LineChart />
+        <BarChart />
+      </div>
     </div>
   );
 }

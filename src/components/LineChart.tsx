@@ -1,6 +1,7 @@
 import data from "../data/Wine-Data.json";
 import ReactECharts, { EChartsOption } from "echarts-for-react";
 
+// Define a type for your data
 type WineDataItem = {
   Alcohol: number | string;
   "Malic Acid": number | string;
@@ -17,27 +18,12 @@ type WineDataItem = {
   Unknown: number | string;
 };
 
-function BarChart() {
-  // Calculate minimum Magnesium value for each Alcohol category
-  const alcoholCategories: Record<number | string, number | string>  = {};
-  data.forEach((item: WineDataItem) => {
-    if (
-      !(item.Alcohol in alcoholCategories) ||
-      item.Magnesium < alcoholCategories[item.Alcohol]
-    ) {
-      alcoholCategories[item.Alcohol] = item.Magnesium;
-    }
-  });
-
+function LineChart() {
   // Prepare data for echarts
   const option: EChartsOption = {
     xAxis: {
-      type: "category",
-      data: Object.keys(alcoholCategories), // Alcohol categories on the horizontal axis
-      name: "Alcohol", // Label for the horizontal axis
-      axisTick: {
-        alignWithLabel: true,
-      },
+      type: "value",
+      name: "Flavanoids", // Label for the horizontal axis
       nameLocation: "center",
       nameGap: 30,
       nameTextStyle: {
@@ -46,21 +32,22 @@ function BarChart() {
     },
     yAxis: {
       type: "value",
-      name: "Minimum Magnesium", // Label for the vertical axis
+      name: "Ash", // Label for the vertical axis
       nameLocation: "center",
-      nameGap: 24,
+      nameGap: 20,
       nameTextStyle: {
         fontSize: 14,
       },
     },
     series: [
       {
-        data: Object.values(alcoholCategories), // Minimum Magnesium values for each Alcohol category
-        type: "bar",
-        barWidth: "50%",
-        label: {
-          show: true, // show Minimum Magnesium value inside bar
-        },
+        data: data.map((item: WineDataItem) => item.Flavanoids),
+        type: "line",
+      },
+      {
+        data: data.map((item: WineDataItem) => item.Ash),
+        type: "line",
+        lineColor: "green",
       },
     ],
   };
@@ -68,4 +55,4 @@ function BarChart() {
   return <ReactECharts option={option} className="chart" />;
 }
 
-export default BarChart;
+export default LineChart;
